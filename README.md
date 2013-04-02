@@ -5,6 +5,8 @@ Capped collections for [LevelDB](https://github.com/rvagg/levelup).
 
 Capping happens offline in order not to slow the main operations down.
 
+[![Build Status](https://travis-ci.org/juliangruber/level-capped.png?branch=master)](https://travis-ci.org/juliangruber/level-capped)
+
 ## Usage
 
 ```js
