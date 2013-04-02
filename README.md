@@ -29,7 +29,7 @@ db.put('foo!01', 'bar');
 
 Let there never be more than `max` entries (that start with `prefix`).
 
-### cap#end
+### cap#end()
 
 Stop capping.
 
