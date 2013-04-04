@@ -23,18 +23,13 @@ function cap (db, prefix, max) {
     scheduled = false;
     cleaning = true;
 
-    keys.sort();
+    var toDelete = keys.sort().splice(0, keys.length - max);
+    var deleted = 0;
 
-    var toDelete = [];
-    while (keys.length - max) {
-      toDelete.push(keys.shift());
-    }
-
-    var key;
-    while (key = toDelete.shift()) {
-      db.del(key, function (err) {
+    for (var i = 0; i < toDelete.length; i++) {
+      db.del(toDelete[i], function (err) {
         if (err) ee.emit('error', err);
-        if (!toDelete.length) {
+        if (++deleted == toDelete.length) {
           cleaning = false;
           if (scheduled) cleanup();
         }
