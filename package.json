@@ -9,7 +9,7 @@
   "homepage": "https://github.com/juliangruber/level-capped",
   "main": "index.js",
   "scripts": {
-    "test": "node test/test.js"
+    "test": "tap test/test.js"
   },
   "dependencies": {
     "level-livefeed": "~0.1.3"
