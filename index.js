@@ -1,5 +1,6 @@
-var livefeed = require('level-livefeed');
 var EventEmitter = require('events').EventEmitter;
+var LiveStream = require('level-live-stream');
+var SubLevel = require('level-sublevel');
 
 module.exports = cap;
 
@@ -38,10 +39,11 @@ function cap (db, prefix, max) {
   }
 
   var opts = prefix
-    ? { start : prefix, end : prefix + '~' }
+    ? { min : prefix, max : prefix + '~' }
     : {}
 
-  var feed = livefeed(db, opts);
+  SubLevel(db);
+  var feed = LiveStream(db, opts);
 
   feed.on('data', function (update) {
     if (update.type != 'put') return;

@@ -1,7 +1,7 @@
 {
   "name": "level-capped",
   "description": "Capped collections for LevelDB",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/juliangruber/level-capped.git"
@@ -12,12 +12,13 @@
     "test": "tap test/test.js"
   },
   "dependencies": {
-    "level-livefeed": "~0.1.3"
+    "level-sublevel": "~4.6.4",
+    "level-live-stream": "~1.4.0"
   },
   "devDependencies": {
     "tap": "*",
     "rimraf": "~2.1.4",
-    "levelup": "~0.6.2"
+    "levelup": "~0.8.0"
   },
   "keywords": [
     "capped",
