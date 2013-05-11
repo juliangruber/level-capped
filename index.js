@@ -46,7 +46,7 @@ function cap (db, prefix, max) {
   var feed = LiveStream(db, opts);
 
   feed.on('data', function (update) {
-    if (update.type != 'put') return;
+    if (update.type != undefined && update.type != 'put') return;
 
     keys.push(update.key);
     if (keys.length > max) cleanup();

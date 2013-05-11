@@ -36,28 +36,29 @@ function test (opts) {
     rimraf.sync(__dirname + '/db');
     var db = levelup(__dirname + '/db');
 
-    var capped = opts.create(db);
-
     var written = 0;
     var toWrite = opts.input.length;
 
-    for (var i = 0; i < toWrite; i++) (function (i) {
-      db.put(opts.input[i], 'bar', function (err) {
-        if (err) throw err;
-        if (++written == toWrite) setTimeout(read, 500);
-      });
-    })(i);
+    var ws = db.createWriteStream();
+    for (var i = 0; i < toWrite; i++) {
+      ws.write({ type : 'put', key : opts.input[i], value : 'bar'});
+    }
+    ws.end();
+    ws.on('close', read);
 
     function read () {
-      var keys = [];
-      db.createKeyStream()
-      .on('data', keys.push.bind(keys))
-      .on('end', function () {
-        t.deepEqual(keys, opts.output);
-        db.close(function () {
-          t.end();
+      opts.create(db);
+      setTimeout(function () {
+        var keys = [];
+        db.createKeyStream()
+        .on('data', keys.push.bind(keys))
+        .on('end', function () {
+          t.deepEqual(keys, opts.output);
+          db.close(function () {
+            t.end();
+          });
         });
-      });
+      }, 500);
     }
   });
 }

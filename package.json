@@ -1,7 +1,7 @@
 {
   "name": "level-capped",
   "description": "Capped collections for LevelDB",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": {
     "type": "git",
     "url": "git://github.com/juliangruber/level-capped.git"
