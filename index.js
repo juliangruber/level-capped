@@ -48,7 +48,7 @@ function cap (db, prefix, max) {
   feed.on('data', function (update) {
     if (update.type != undefined && update.type != 'put') return;
 
-    keys.push(update.key);
+    if (keys.indexOf(update.key) == -1) keys.push(update.key);
     if (keys.length > max) cleanup();
   });
 
