@@ -1,7 +1,8 @@
-var cap     = require('..');
-var levelup = require('levelup');
-var rimraf  = require('rimraf');
-var tap     = require('tap');
+var cap         = require('..');
+var level       = require('level');
+var rimraf      = require('rimraf');
+var tap         = require('tap');
+var WriteStream = require('level-ws').WriteStream;
 
 test({
   name   : 'capped',
@@ -34,12 +35,12 @@ test({
 function test (opts) {
   tap.test(opts.name, function (t) {
     rimraf.sync(__dirname + '/db');
-    var db = levelup(__dirname + '/db');
+    var db = level(__dirname + '/db');
 
     var written = 0;
     var toWrite = opts.input.length;
 
-    var ws = db.createWriteStream();
+    var ws = new WriteStream({}, db);
     for (var i = 0; i < toWrite; i++) {
       ws.write({ type : 'put', key : opts.input[i], value : 'bar'});
     }

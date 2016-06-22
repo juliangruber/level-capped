@@ -16,9 +16,10 @@
     "level-live-stream": "~1.4.0"
   },
   "devDependencies": {
-    "tap": "*",
+    "level": "^1.4.0",
+    "level-ws": "0.0.1",
     "rimraf": "~2.1.4",
-    "levelup": "~0.8.0"
+    "tap": "*"
   },
   "keywords": [
     "capped",
